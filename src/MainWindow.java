@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Created by Ksysio on 2016-05-31.
@@ -12,7 +13,6 @@ public class MainWindow {
     private JButton openButton;
     private JButton saveButton;
     private JButton saveAsButton;
-    private JButton newRulesButton;
     private JButton addDataButton;
     private JButton addRuleButton;
     private JButton solveButton;
@@ -21,5 +21,31 @@ public class MainWindow {
     private JTextField textField1;
     private JRadioButton trueRadioButton;
     private JRadioButton falseRadioButton;
+    private JButton removeSelectedButton;
+
+    final JFileChooser fileChooserData;
+    final JFileChooser fileChooserRules;
+
+    public MainWindow(){
+
+        fileChooserData = new JFileChooser();
+        fileChooserData.setFileFilter(new FileNameExtensionFilter("Logical Engine Data File", "led"));
+
+        fileChooserRules = new JFileChooser();
+        fileChooserRules.setFileFilter(new FileNameExtensionFilter("Logical Engine Rules File", "ler"));
+
+        newButton.addActionListener(actionEvent -> {
+            JFrame frame = new JFrame("Logical Engine Adding Rules and Data");
+            frame.setContentPane(new AddWindow().AddPanel);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+        });
+
+
+
+
+
+    }
 
 }

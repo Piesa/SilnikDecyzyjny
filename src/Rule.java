@@ -3,35 +3,35 @@
  */
 public class Rule {
 
-    int Howmany; // Przetrzymuje ilość argumentów w danej regule
-    int DataId[]; // Przetrzymuje odnośniki do listy danych
-    int Relation; // Przetrzymuje relację którą związane są dane w regule ( && albo || )
+    int howMany; // Przetrzymuje ilość argumentów w danej regule
+    int dataId[]; // Przetrzymuje odnośniki do listy danych
+    int relation; // Przetrzymuje relację którą związane są dane w regule ( && albo || )
 
     public Rule(int howmany, int id[], int relation) {
-        this.Howmany = howmany;
-        this.Relation = relation;
+        this.howMany = howmany;
+        this.relation = relation;
         int i = 0;
         while (i < howmany){
-            this.DataId[i] = id[i];
+            this.dataId[i] = id[i];
             i++;
         }
     }
 
     public int getDataId(int id){
 
-        return DataId[id];
+        return dataId[id];
 
     }
 
-    public int getHowmany(){
+    public int getHowMany(){
 
-        return Howmany;
+        return howMany;
 
     }
 
     public int getRelation(){
 
-        return Relation;
+        return relation;
 
     }
 

@@ -3,30 +3,30 @@
  */
 public class Information {
 
-    private String Name;
-    private int Value;
+    private String name;
+    private int value;
 
     public Information(String name, int value){
-        this.Name = name;
-        this.Value = value;
+        this.name = name;
+        this.value = value;
 
     }
 
     public void setValue(int value){
 
-        this.Value = value;
+        this.value = value;
 
     }
 
     public String getName(){
 
-        return Name;
+        return name;
 
     }
 
     public int getValue(){
 
-        return Value;
+        return value;
 
     }
 
