@@ -1,7 +1,7 @@
 /**
  * Created by Ksysio on 2016-05-30.
  */
-public class Rule {
+public  class Rule implements java.io.Serializable {
 
     int howMany; // Przetrzymuje ilość argumentów w danej regule
     int dataId[]; // Przetrzymuje odnośniki do listy danych

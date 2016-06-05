@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Ksysio on 2016-05-30.
  */
-public class Data {
+public  class Data implements java.io.Serializable {
     public List<Information> data;
 
 

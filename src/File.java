@@ -3,7 +3,7 @@ import java.io.*;
 /**
  * Created by Ksysio on 2016-06-05.
  */
-public class File {
+public class File implements java.io.Serializable{
     public AllRules rules;
     public Data data;
 
@@ -23,9 +23,9 @@ public class File {
         objectOutputStream.close();
     }
 
-    public static Data deserialize(InputStream is) throws IOException, ClassNotFoundException {
+    public static File deserialize(InputStream is) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(is);
-        Data obj = (Data) objectInputStream.readObject();
+        File obj = (File) objectInputStream.readObject();
         objectInputStream.close();
         return obj;
     }

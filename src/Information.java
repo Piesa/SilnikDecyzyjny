@@ -1,7 +1,7 @@
 /**
  * Created by Ksysio on 2016-05-30.
  */
-public class Information {
+public  class Information implements java.io.Serializable {
 
     private String name;
     private int value;

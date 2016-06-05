@@ -40,10 +40,47 @@ public class MainWindow {
 
         newButton.addActionListener(actionEvent -> {
 
+            file = new File();
+
         });
 
-        addDataButton.addActionListener(actionEvent ->{
 
+        addDataButton.addActionListener(actionEvent ->{
+            JFrame buttonFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
+            buttonFrame.setContentPane(new AddDataWindow().ContentPanel);
+            buttonFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            buttonFrame.pack();
+            buttonFrame.setVisible(true);
+        });
+
+        addRuleButton.addActionListener(actionEvent ->{
+            JFrame rulesFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
+            rulesFrame.setContentPane(new AddRuleWindow().ContentPanel);
+            rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            rulesFrame.pack();
+            rulesFrame.setVisible(true);
+        });
+
+        openButton.addActionListener(actionEvent -> {
+            try {
+                if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    String filename = fileChooser.getSelectedFile().getAbsolutePath();
+
+                    if(!filename.endsWith(".lef"))
+                        filename += ".lef";
+
+                    setCurrentFileName(filename);
+                } else {
+                    return;
+                }
+
+                FileInputStream is = new FileInputStream(currentFileName);
+                file = File.deserialize(is);
+
+                //updateView();
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Can't load file: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         saveButton.addActionListener(actionEvent -> {
@@ -71,6 +108,7 @@ public class MainWindow {
                 if(!filename.endsWith(".lef"))
                     filename += ".lef";
 
+                    setCurrentFileName(filename);
             } else {
                 return;
             }
@@ -78,6 +116,10 @@ public class MainWindow {
 
         FileOutputStream is = new FileOutputStream(currentFileName);
         file.serialize(is);
+    }
+
+    private void setCurrentFileName(String filename) {
+        currentFileName = filename;
     }
 
 
