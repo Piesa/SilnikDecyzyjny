@@ -5,18 +5,22 @@ import javax.swing.*;
  */
 public class AddRuleWindow {
     public JPanel ContentPanel;
-    private JSlider slider1;
-    private JComboBox comboBox2;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
-    private JComboBox comboBox5;
-    private JComboBox comboBox6;
-    private JComboBox comboBox7;
-    private JCheckBox negationCheckBox;
-    private JCheckBox negationCheckBox1;
-    private JCheckBox negationCheckBox2;
-    private JCheckBox negationCheckBox3;
-    private JCheckBox negationCheckBox4;
-    private JCheckBox negationCheckBox5;
+    private JComboBox value33;
+    private JComboBox value32;
+    private JComboBox value31;
+    private JCheckBox negation31;
+    private JCheckBox negation32;
+    private JCheckBox negation33;
     private JButton addButton;
+    private JComboBox relationBox;
+    private JComboBox value21;
+    private JComboBox value22;
+    private JCheckBox negation21;
+    private JCheckBox negation22;
+    private JRadioButton threeVariablesRadioButton;
+    private JRadioButton twoVariablesRadioButton;
+    public Rule rule;
+
+
+
 }

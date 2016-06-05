@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 /**
  * Created by Ksysio on 2016-05-31.
  */
 public class MainWindow {
+    private DataListModel dataListModel;
+    private RulesListModel rulesListModel;
     public JPanel ContentPanel;
-        private JList DataList;
+    private JList DataList;
     private JList RulesList;
     private JTextArea textArea1;
     private JButton newButton;
@@ -32,18 +33,29 @@ public class MainWindow {
     public File file;
     private String currentFileName = null;
     final JFileChooser fileChooser;
+    public  Information information;
 
     public MainWindow() {
+
+        if(file == null) {
+            file = new File();
+            System.out.println("xD");
+        }
 
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Logical Engine File", "lef"));
 
         newButton.addActionListener(actionEvent -> {
-
             file = new File();
-
         });
 
+        dataListModel = new DataListModel(file);
+        DataList.setModel(dataListModel);
+        updateDataView();
+
+        rulesListModel = new RulesListModel(file);
+        RulesList.setModel(rulesListModel);
+        updateRulesView();
 
         addDataButton.addActionListener(actionEvent ->{
             JFrame buttonFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
@@ -59,6 +71,7 @@ public class MainWindow {
             rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             rulesFrame.pack();
             rulesFrame.setVisible(true);
+            updateRulesView();
         });
 
         openButton.addActionListener(actionEvent -> {
@@ -77,7 +90,8 @@ public class MainWindow {
                 FileInputStream is = new FileInputStream(currentFileName);
                 file = File.deserialize(is);
 
-                //updateView();
+                updateDataView();
+                updateRulesView();
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "Can't load file: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -118,10 +132,18 @@ public class MainWindow {
         file.serialize(is);
     }
 
+
     private void setCurrentFileName(String filename) {
         currentFileName = filename;
     }
 
+    public void updateDataView() {
+        dataListModel.updateView();
+    }
+
+    public void updateRulesView() {
+        rulesListModel.updateView();
+    }
 
 }
 
