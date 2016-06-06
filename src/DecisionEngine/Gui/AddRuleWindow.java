@@ -1,3 +1,7 @@
+package DecisionEngine.Gui;
+
+import DecisionEngine.Engine.Rule;
+
 import javax.swing.*;
 
 /**

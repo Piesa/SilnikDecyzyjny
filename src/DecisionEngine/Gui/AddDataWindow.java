@@ -1,9 +1,13 @@
+package DecisionEngine.Gui;
+
+import DecisionEngine.Engine.Information;
+import DecisionEngine.Engine.File;
 import javax.swing.*;
 
 /**
  * Created by Ksysio on 2016-06-05.
  */
-public class AddDataWindow extends MainWindow {
+public class AddDataWindow  {
     public JPanel ContentPanel;
     private JLabel Label1;
     private JTextField nameField;
@@ -13,10 +17,11 @@ public class AddDataWindow extends MainWindow {
     private JButton addButton;
     private JCheckBox parameterCheckBox;
     private JTextField parameterField;
+    public Information information;
 
     public int value;
 
-    public AddDataWindow(){
+    public AddDataWindow(File file){
 
         addButton.addActionListener(actionEvent ->{
             if(falseRadioButton.isSelected())
@@ -31,7 +36,6 @@ public class AddDataWindow extends MainWindow {
                 information = new Information(nameField.getText(), value);
 
             file.data.AddToData(information);
-            updateDataView();
             System.out.println(file.data.dataList.size());
         });
 

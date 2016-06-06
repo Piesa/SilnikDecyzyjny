@@ -1,10 +1,15 @@
+package DecisionEngine.Gui;
+
+import DecisionEngine.Engine.File;
+import DecisionEngine.Engine.Information;
+import DecisionEngine.Gui.AddDataWindow;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 /**
  * Created by Ksysio on 2016-05-31.
  */
@@ -33,14 +38,11 @@ public class MainWindow {
     public File file;
     private String currentFileName = null;
     final JFileChooser fileChooser;
-    public  Information information;
 
     public MainWindow() {
 
-        if(file == null) {
-            file = new File();
-            System.out.println("xD");
-        }
+        file = new File();
+        System.out.println("xD");
 
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Logical Engine File", "lef"));
@@ -59,10 +61,11 @@ public class MainWindow {
 
         addDataButton.addActionListener(actionEvent ->{
             JFrame buttonFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
-            buttonFrame.setContentPane(new AddDataWindow().ContentPanel);
+            buttonFrame.setContentPane(new AddDataWindow(file);
             buttonFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             buttonFrame.pack();
             buttonFrame.setVisible(true);
+            updateDataView();
         });
 
         addRuleButton.addActionListener(actionEvent ->{
@@ -72,6 +75,7 @@ public class MainWindow {
             rulesFrame.pack();
             rulesFrame.setVisible(true);
             updateRulesView();
+
         });
 
         openButton.addActionListener(actionEvent -> {
