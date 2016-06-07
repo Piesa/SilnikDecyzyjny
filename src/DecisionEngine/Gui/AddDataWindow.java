@@ -2,6 +2,8 @@ package DecisionEngine.Gui;
 
 import DecisionEngine.Engine.Information;
 import DecisionEngine.Engine.File;
+import sun.applet.Main;
+
 import javax.swing.*;
 
 /**
@@ -18,11 +20,12 @@ public class AddDataWindow  {
     private JCheckBox parameterCheckBox;
     private JTextField parameterField;
     public Information information;
-
+    private MainWindow mainWindow;
     public int value;
 
-    public AddDataWindow(File file){
+    public AddDataWindow(MainWindow window){
 
+        mainWindow = window;
         addButton.addActionListener(actionEvent ->{
             if(falseRadioButton.isSelected())
                 value = 0;
@@ -35,8 +38,9 @@ public class AddDataWindow  {
             else
                 information = new Information(nameField.getText(), value);
 
-            file.data.AddToData(information);
-            System.out.println(file.data.dataList.size());
+            mainWindow.file.data.AddToData(information);
+            System.out.println(mainWindow.file.data.dataList.size());
+            mainWindow.updateDataView();
         });
 
     }

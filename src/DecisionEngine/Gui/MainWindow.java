@@ -44,13 +44,6 @@ public class MainWindow {
         file = new File();
         System.out.println("xD");
 
-        fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Logical Engine File", "lef"));
-
-        newButton.addActionListener(actionEvent -> {
-            file = new File();
-        });
-
         dataListModel = new DataListModel(file);
         DataList.setModel(dataListModel);
         updateDataView();
@@ -59,9 +52,27 @@ public class MainWindow {
         RulesList.setModel(rulesListModel);
         updateRulesView();
 
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Logical Engine File", "lef"));
+
+        newButton.addActionListener(actionEvent -> {
+            file = new File();
+            dataListModel = new DataListModel(file);
+            DataList.setModel(dataListModel);
+            updateDataView();
+
+            rulesListModel = new RulesListModel(file);
+            RulesList.setModel(rulesListModel);
+            updateRulesView();
+
+            currentFileName = null;
+        });
+
+
+
         addDataButton.addActionListener(actionEvent ->{
             JFrame buttonFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
-            buttonFrame.setContentPane(new AddDataWindow(file);
+            buttonFrame.setContentPane(new AddDataWindow(this).ContentPanel);
             buttonFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             buttonFrame.pack();
             buttonFrame.setVisible(true);
@@ -70,7 +81,7 @@ public class MainWindow {
 
         addRuleButton.addActionListener(actionEvent ->{
             JFrame rulesFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
-            rulesFrame.setContentPane(new AddRuleWindow().ContentPanel);
+            rulesFrame.setContentPane(new AddRuleWindow(this).ContentPanel);
             rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             rulesFrame.pack();
             rulesFrame.setVisible(true);
@@ -99,6 +110,15 @@ public class MainWindow {
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "Can't load file: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            updateDataView();
+            updateRulesView();
+            dataListModel = new DataListModel(file);
+            DataList.setModel(dataListModel);
+            updateDataView();
+
+            rulesListModel = new RulesListModel(file);
+            RulesList.setModel(rulesListModel);
+            updateRulesView();
         });
 
         saveButton.addActionListener(actionEvent -> {

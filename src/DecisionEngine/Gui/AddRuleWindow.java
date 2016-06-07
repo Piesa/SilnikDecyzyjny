@@ -24,6 +24,12 @@ public class AddRuleWindow {
     private JRadioButton threeVariablesRadioButton;
     private JRadioButton twoVariablesRadioButton;
     public Rule rule;
+    private MainWindow mainWindow;
+
+    public AddRuleWindow(MainWindow window){
+
+        mainWindow = window;
+    }
 
 
 
