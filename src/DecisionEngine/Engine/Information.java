@@ -26,4 +26,10 @@ public  class Information implements java.io.Serializable {
         else
             return String.format("%s == %s", name, value);
     }
+    public String Name(){
+        if(parameter != null)
+            return String.format("%s(%s)", name, parameter);
+        else
+            return String.format("%s", name);
+    }
 }

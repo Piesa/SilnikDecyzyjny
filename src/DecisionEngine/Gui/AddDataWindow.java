@@ -25,6 +25,13 @@ public class AddDataWindow  {
 
     public AddDataWindow(MainWindow window){
 
+        parameterCheckBox.addChangeListener(actionEvent ->{
+            if(parameterCheckBox.isSelected())
+                parameterField.setEnabled(true);
+            else
+                parameterField.setEnabled(false);
+        });
+
         mainWindow = window;
         addButton.addActionListener(actionEvent ->{
             if(falseRadioButton.isSelected())

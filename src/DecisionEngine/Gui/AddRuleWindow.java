@@ -29,6 +29,49 @@ public class AddRuleWindow {
     public AddRuleWindow(MainWindow window){
 
         mainWindow = window;
+
+
+        twoVariablesRadioButton.addActionListener(actionEvent ->{
+            value31.setEnabled(false);
+            value32.setEnabled(false);
+            value33.setEnabled(false);
+            value21.setEnabled(true);
+            value22.setEnabled(true);
+            relationBox.setEnabled(false);
+            negation31.setEnabled(false);
+            negation32.setEnabled(false);
+            negation33.setEnabled(false);
+            negation21.setEnabled(true);
+            negation22.setEnabled(true);
+        });
+
+
+        threeVariablesRadioButton.addActionListener(actionEvent ->{
+            value31.setEnabled(true);
+            value32.setEnabled(true);
+            value33.setEnabled(true);
+            value21.setEnabled(false);
+            value22.setEnabled(false);
+            relationBox.setEnabled(true);
+            negation31.setEnabled(true);
+            negation32.setEnabled(true);
+            negation33.setEnabled(true);
+            negation21.setEnabled(false);
+            negation22.setEnabled(false);
+        });
+
+        relationBox.addItem("v");
+        relationBox.addItem("^");
+
+        int i;
+        for(i = 0; i < mainWindow.file.data.dataList.size(); i++){
+            value33.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value32.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value31.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value21.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value22.addItem(mainWindow.file.data.dataList.get(i).Name());
+        }
+
     }
 
 

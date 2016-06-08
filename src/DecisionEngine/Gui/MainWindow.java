@@ -2,6 +2,7 @@ package DecisionEngine.Gui;
 
 import DecisionEngine.Engine.File;
 import DecisionEngine.Engine.Information;
+import DecisionEngine.Engine.Rule;
 import DecisionEngine.Gui.AddDataWindow;
 
 import javax.swing.*;
@@ -33,6 +34,10 @@ public class MainWindow {
     private JRadioButton trueRadioButton;
     private JRadioButton falseRadioButton;
     private JButton removeSelectedButton;
+    private JPanel DataTab;
+    private JTabbedPane Tab;
+    private JPanel RulesTab;
+    private JPanel ChainingTab;
     private JButton saveRulesButton;
     private JButton saveRulesAsButton;
     public File file;
@@ -134,6 +139,27 @@ public class MainWindow {
                 save(true);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Can't save file: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        removeSelectedButton.addActionListener(actionEvent->{
+            if(DataTab.isVisible()){
+                try {
+                    Information information = file.data.dataList.get(DataList.getSelectedIndex());
+                    file.data.dataList.remove(information);
+                    updateDataView();
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Can't remove data.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            if(RulesTab.isVisible()){
+                try {
+                    Rule rule = file.rules.rulesList.get(DataList.getSelectedIndex());
+                    file.rules.rulesList.remove(rule);
+                    updateRulesView();
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Can't remove rule.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
