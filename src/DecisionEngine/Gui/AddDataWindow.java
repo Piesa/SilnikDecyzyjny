@@ -29,7 +29,8 @@ public class AddDataWindow  {
             if(parameterCheckBox.isSelected())
                 parameterField.setEnabled(true);
             else
-                parameterField.setEnabled(false);
+                parameterField.setEnabled(false
+                );
         });
 
         mainWindow = window;

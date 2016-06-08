@@ -142,6 +142,10 @@ public class MainWindow {
             }
         });
 
+        solveButton.addActionListener(actionEvent->{
+            System.out.println(DataList.getSelectedIndex());
+        });
+
         removeSelectedButton.addActionListener(actionEvent->{
             if(DataTab.isVisible()){
                 try {
@@ -154,7 +158,7 @@ public class MainWindow {
             }
             if(RulesTab.isVisible()){
                 try {
-                    Rule rule = file.rules.rulesList.get(DataList.getSelectedIndex());
+                    Rule rule = file.rules.rulesList.get(RulesList.getSelectedIndex());
                     file.rules.rulesList.remove(rule);
                     updateRulesView();
                 } catch(Exception e) {

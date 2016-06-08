@@ -26,12 +26,23 @@ public class AddRuleWindow {
     public Rule rule;
     private MainWindow mainWindow;
 
-    public AddRuleWindow(MainWindow window){
+    public AddRuleWindow(MainWindow window) {
 
         mainWindow = window;
 
+        relationBox.addItem("v");
+        relationBox.addItem("^");
 
-        twoVariablesRadioButton.addActionListener(actionEvent ->{
+        int i;
+        for (i = 0; i < mainWindow.file.data.dataList.size(); i++) {
+            value33.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value32.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value31.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value21.addItem(mainWindow.file.data.dataList.get(i).Name());
+            value22.addItem(mainWindow.file.data.dataList.get(i).Name());
+        }
+
+        twoVariablesRadioButton.addActionListener(actionEvent -> {
             value31.setEnabled(false);
             value32.setEnabled(false);
             value33.setEnabled(false);
@@ -46,7 +57,7 @@ public class AddRuleWindow {
         });
 
 
-        threeVariablesRadioButton.addActionListener(actionEvent ->{
+        threeVariablesRadioButton.addActionListener(actionEvent -> {
             value31.setEnabled(true);
             value32.setEnabled(true);
             value33.setEnabled(true);
@@ -60,20 +71,21 @@ public class AddRuleWindow {
             negation22.setEnabled(false);
         });
 
-        relationBox.addItem("v");
-        relationBox.addItem("^");
 
-        int i;
-        for(i = 0; i < mainWindow.file.data.dataList.size(); i++){
-            value33.addItem(mainWindow.file.data.dataList.get(i).Name());
-            value32.addItem(mainWindow.file.data.dataList.get(i).Name());
-            value31.addItem(mainWindow.file.data.dataList.get(i).Name());
-            value21.addItem(mainWindow.file.data.dataList.get(i).Name());
-            value22.addItem(mainWindow.file.data.dataList.get(i).Name());
-        }
 
+        addButton.addActionListener(AddEvent ->{
+           if(twoVariablesRadioButton.isSelected())
+               rule = new Rule(2, value21.getSelectedItem().toString(), value22.getSelectedItem().toString(), negation21.isSelected(), negation22.isSelected());
+           else {
+               if (relationBox.getSelectedItem() == "^") {
+                   rule = new Rule(3, value31.getSelectedItem().toString(), value32.getSelectedItem().toString(), value33.getSelectedItem().toString(), 1, negation31.isSelected(), negation32.isSelected(), negation33.isSelected());
+               }
+               else
+                   rule = new Rule(3, value31.getSelectedItem().toString(), value32.getSelectedItem().toString(), value33.getSelectedItem().toString(), 2, negation31.isSelected(), negation32.isSelected(), negation33.isSelected());
+           }
+            mainWindow.file.rules.AddToRules(rule);
+            System.out.println(mainWindow.file.rules.rulesList.size());
+            mainWindow.updateRulesView();
+        });
     }
-
-
-
 }
