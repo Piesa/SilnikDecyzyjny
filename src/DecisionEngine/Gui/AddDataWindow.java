@@ -19,11 +19,14 @@ public class AddDataWindow  {
     private JButton addButton;
     private JCheckBox parameterCheckBox;
     private JTextField parameterField;
-    public Information information;
+    private Information information;
     private MainWindow mainWindow;
-    public int value;
+    private int value;
+    private boolean error;
+
 
     public AddDataWindow(MainWindow window){
+
 
         parameterCheckBox.addChangeListener(actionEvent ->{
             if(parameterCheckBox.isSelected())
@@ -32,7 +35,6 @@ public class AddDataWindow  {
                 parameterField.setEnabled(false
                 );
         });
-
         mainWindow = window;
         addButton.addActionListener(actionEvent ->{
             if(falseRadioButton.isSelected())
@@ -41,13 +43,24 @@ public class AddDataWindow  {
                 value = 1;
             else
                 value = 2;
-            if(parameterCheckBox.isSelected())
+            if(parameterCheckBox.isSelected()) {
                 information = new Information(nameField.getText(), value, parameterField.getText());
-            else
+                for(int i = 0; i < mainWindow.file.data.dataList.size(); i++)
+                   if(information.Name().equals(mainWindow.file.data.dataList.get(i).Name())) {
+                        JOptionPane.showMessageDialog(null, "Can't add data", "Error", JOptionPane.ERROR_MESSAGE);
+                        error = true;
+                   }
+            }
+                else {
                 information = new Information(nameField.getText(), value);
-
+                for (int i = 0; i < mainWindow.file.data.dataList.size(); i++)
+                    if (information.Name().equals(mainWindow.file.data.dataList.get(i).Name())) {
+                        JOptionPane.showMessageDialog(null, "Can't add data", "Error", JOptionPane.ERROR_MESSAGE);
+                        error = true;
+                    }
+            }
+            if(!error)
             mainWindow.file.data.AddToData(information);
-            System.out.println(mainWindow.file.data.dataList.size());
             mainWindow.updateDataView();
         });
 
