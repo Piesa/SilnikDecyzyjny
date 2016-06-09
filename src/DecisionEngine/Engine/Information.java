@@ -6,7 +6,7 @@ package DecisionEngine.Engine;
 public  class Information implements java.io.Serializable {
 
     private String name;
-    private int value;
+    public int value;
     private String parameter;
 
     public Information(String name, int value){
@@ -32,5 +32,10 @@ public  class Information implements java.io.Serializable {
         else
             return String.format("%s", name);
     }
+
+    public void setValue(int x){
+        value = x;
+    }
+
 }
 
