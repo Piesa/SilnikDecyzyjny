@@ -35,7 +35,7 @@ public class Solver {
                 } else if ((getInformationValue(rule, 2) != 2) && (getInformationValue(rule, 1) == 1) && (getInformationValue(rule, 3) == 0)) {
                     setValue(rule, 1, 0);
                 }
-            } else (rule.relation == 2) {
+            } else if(rule.relation == 2) {
                 if ((getInformationValue(rule, 2) != 2) && (getInformationValue(rule, 1) != 2) && (getInformationValue(rule, 3) == 2)) {
                     if ((getInformationValue(rule, 2) == 1) || (getInformationValue(rule, 1) == 1)) {
                         setValue(rule, 3, 1);
@@ -50,7 +50,7 @@ public class Solver {
     }
 
     public boolean forwardChaining() {
-
+        return true;
     }
 
     public boolean backwardChaining() {
