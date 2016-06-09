@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * Created by Ksysio on 2016-06-05.
  */
-public class AddDataWindow  {
+public class AddDataWindow {
     public JPanel ContentPanel;
     private JLabel Label1;
     private JTextField nameField;
@@ -25,33 +25,41 @@ public class AddDataWindow  {
     private boolean error;
 
 
-    public AddDataWindow(MainWindow window){
+    public AddDataWindow(MainWindow window) {
 
 
-        parameterCheckBox.addChangeListener(actionEvent ->{
-            if(parameterCheckBox.isSelected())
+        parameterCheckBox.addChangeListener(actionEvent -> {
+            if (parameterCheckBox.isSelected())
                 parameterField.setEnabled(true);
             else
                 parameterField.setEnabled(false
                 );
         });
         mainWindow = window;
-        addButton.addActionListener(actionEvent ->{
-            if(falseRadioButton.isSelected())
+        addButton.addActionListener(actionEvent -> {
+            error = false;
+            if (falseRadioButton.isSelected())
                 value = 0;
-            else if(trueRadioButton.isSelected())
+            else if (trueRadioButton.isSelected())
                 value = 1;
             else
                 value = 2;
-            if(parameterCheckBox.isSelected()) {
+            if (parameterCheckBox.isSelected()) {
+                if (parameterField.getText().equals("") || nameField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "No data to add", "Error", JOptionPane.ERROR_MESSAGE);
+                    error = true;
+                }
                 information = new Information(nameField.getText(), value, parameterField.getText());
-                for(int i = 0; i < mainWindow.file.data.dataList.size(); i++)
-                   if(information.Name().equals(mainWindow.file.data.dataList.get(i).Name())) {
+                for (int i = 0; i < mainWindow.file.data.dataList.size(); i++)
+                    if (information.Name().equals(mainWindow.file.data.dataList.get(i).Name())) {
                         JOptionPane.showMessageDialog(null, "Can't add data", "Error", JOptionPane.ERROR_MESSAGE);
                         error = true;
-                   }
-            }
-                else {
+                    }
+            } else {
+                if (nameField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "No data to add", "Error", JOptionPane.ERROR_MESSAGE);
+                    error = true;
+                }
                 information = new Information(nameField.getText(), value);
                 for (int i = 0; i < mainWindow.file.data.dataList.size(); i++)
                     if (information.Name().equals(mainWindow.file.data.dataList.get(i).Name())) {
@@ -59,8 +67,8 @@ public class AddDataWindow  {
                         error = true;
                     }
             }
-            if(!error)
-            mainWindow.file.data.AddToData(information);
+            if (!error)
+                mainWindow.file.data.AddToData(information);
             mainWindow.updateDataView();
         });
 

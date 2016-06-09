@@ -74,25 +74,23 @@ public class AddRuleWindow {
         });
 
 
-
-        addButton.addActionListener(AddEvent ->{
+        addButton.addActionListener(AddEvent -> {
             error = false;
-            if(twoVariablesRadioButton.isSelected()) {
+            if (twoVariablesRadioButton.isSelected()) {
                 rule = new Rule(2, value21.getSelectedItem().toString(), value22.getSelectedItem().toString(), negation21.isSelected(), negation22.isSelected());
                 rule2 = new Rule(2, value22.getSelectedItem().toString(), value21.getSelectedItem().toString(), negation22.isSelected(), negation21.isSelected());
                 if (value21.getSelectedItem().toString().equals(value22.getSelectedItem().toString())) {
                     JOptionPane.showMessageDialog(null, "Can't add rule", "Error", JOptionPane.ERROR_MESSAGE);
                     error = true;
                 }
-                for(int i = 0; i < mainWindow.file.rules.rulesList.size(); i++) {
+                for (int i = 0; i < mainWindow.file.rules.rulesList.size(); i++) {
                     if (rule.toString().equals(mainWindow.file.rules.rulesList.get(i).toString()) || rule2.toString().equals(mainWindow.file.rules.rulesList.get(i).toString())) {
-                       JOptionPane.showMessageDialog(null, "Rule already exists", "Error", JOptionPane.ERROR_MESSAGE);
-                       error = true;
-                       break;
+                        JOptionPane.showMessageDialog(null, "Rule already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                        error = true;
+                        break;
                     }
                 }
-            }
-            else {
+            } else {
                 if (relationBox.getSelectedItem() == "^") {
                     rule = new Rule(3, value31.getSelectedItem().toString(), value32.getSelectedItem().toString(), value33.getSelectedItem().toString(), 1, negation31.isSelected(), negation32.isSelected(), negation33.isSelected());
                     rule2 = new Rule(3, value32.getSelectedItem().toString(), value31.getSelectedItem().toString(), value33.getSelectedItem().toString(), 1, negation32.isSelected(), negation31.isSelected(), negation33.isSelected());
@@ -102,15 +100,14 @@ public class AddRuleWindow {
                         error = true;
                     }
 
-                    for(int i = 0; i < mainWindow.file.rules.rulesList.size(); i++) {
+                    for (int i = 0; i < mainWindow.file.rules.rulesList.size(); i++) {
                         if (rule.toString().equals(mainWindow.file.rules.rulesList.get(i).toString()) || rule2.toString().equals(mainWindow.file.rules.rulesList.get(i).toString())) {
                             JOptionPane.showMessageDialog(null, "Rule already exists", "Error", JOptionPane.ERROR_MESSAGE);
                             error = true;
                             break;
                         }
                     }
-                }
-                else {
+                } else {
                     rule = new Rule(3, value31.getSelectedItem().toString(), value32.getSelectedItem().toString(), value33.getSelectedItem().toString(), 2, negation31.isSelected(), negation32.isSelected(), negation33.isSelected());
                     rule2 = new Rule(3, value32.getSelectedItem().toString(), value31.getSelectedItem().toString(), value33.getSelectedItem().toString(), 2, negation32.isSelected(), negation31.isSelected(), negation33.isSelected());
 
@@ -129,8 +126,8 @@ public class AddRuleWindow {
                 }
             }
             System.out.print(error);
-            if(!error)
-            mainWindow.file.rules.AddToRules(rule);
+            if (!error)
+                mainWindow.file.rules.AddToRules(rule);
             mainWindow.updateRulesView();
         });
     }

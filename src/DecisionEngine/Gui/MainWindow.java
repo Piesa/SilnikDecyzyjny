@@ -3,6 +3,7 @@ package DecisionEngine.Gui;
 import DecisionEngine.Engine.File;
 import DecisionEngine.Engine.Information;
 import DecisionEngine.Engine.Rule;
+import DecisionEngine.Engine.Solver;
 import DecisionEngine.Gui.AddDataWindow;
 
 import javax.swing.*;
@@ -43,11 +44,14 @@ public class MainWindow {
     public File file;
     private String currentFileName = null;
     final JFileChooser fileChooser;
+    public Solver solver;
 
     public MainWindow() {
 
         file = new File();
-        System.out.println("xD");
+
+        solver = new Solver(this);
+
 
         dataListModel = new DataListModel(file);
         DataList.setModel(dataListModel);
@@ -74,8 +78,7 @@ public class MainWindow {
         });
 
 
-
-        addDataButton.addActionListener(actionEvent ->{
+        addDataButton.addActionListener(actionEvent -> {
             JFrame buttonFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
             buttonFrame.setContentPane(new AddDataWindow(this).ContentPanel);
             buttonFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,7 +87,7 @@ public class MainWindow {
             updateDataView();
         });
 
-        addRuleButton.addActionListener(actionEvent ->{
+        addRuleButton.addActionListener(actionEvent -> {
             JFrame rulesFrame = new JFrame("Forward and Backward Chaining Logical Engine ");
             rulesFrame.setContentPane(new AddRuleWindow(this).ContentPanel);
             rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,10 +99,10 @@ public class MainWindow {
 
         openButton.addActionListener(actionEvent -> {
             try {
-                if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     String filename = fileChooser.getSelectedFile().getAbsolutePath();
 
-                    if(!filename.endsWith(".lef"))
+                    if (!filename.endsWith(".lef"))
                         filename += ".lef";
 
                     setCurrentFileName(filename);
@@ -112,7 +115,7 @@ public class MainWindow {
 
                 updateDataView();
                 updateRulesView();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Can't load file: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             updateDataView();
@@ -142,41 +145,42 @@ public class MainWindow {
             }
         });
 
-        solveButton.addActionListener(actionEvent->{
-            System.out.println(DataList.getSelectedIndex());
+        solveButton.addActionListener(actionEvent -> {
+
         });
 
-        removeSelectedButton.addActionListener(actionEvent->{
-            if(DataTab.isVisible()){
+        removeSelectedButton.addActionListener(actionEvent -> {
+            if (DataTab.isVisible()) {
                 try {
                     Information information = file.data.dataList.get(DataList.getSelectedIndex());
                     file.data.dataList.remove(information);
                     updateDataView();
-                } catch(Exception e) {
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Can't remove data.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            if(RulesTab.isVisible()){
+            if (RulesTab.isVisible()) {
                 try {
                     Rule rule = file.rules.rulesList.get(RulesList.getSelectedIndex());
                     file.rules.rulesList.remove(rule);
                     updateRulesView();
-                } catch(Exception e) {
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Can't remove rule.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
     }
+
     private void save(boolean saveAs) throws IOException {
         if (currentFileName == null || saveAs) {
-            if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                 String filename = fileChooser.getSelectedFile().getAbsolutePath();
 
-                if(!filename.endsWith(".lef"))
+                if (!filename.endsWith(".lef"))
                     filename += ".lef";
 
-                    setCurrentFileName(filename);
+                setCurrentFileName(filename);
             } else {
                 return;
             }

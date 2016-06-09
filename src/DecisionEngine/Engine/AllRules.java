@@ -6,16 +6,16 @@ import java.util.List;
 /**
  * Created by Ksysio on 2016-05-30.
  */
-public  class AllRules implements java.io.Serializable {
+public class AllRules implements java.io.Serializable {
     public List<Rule> rulesList;
 
-    public AllRules(){
+    public AllRules() {
 
         this.rulesList = new ArrayList<Rule>();
 
     }
 
-    public void AddToRules(Rule rule){
+    public void AddToRules(Rule rule) {
 
         this.rulesList.add(rule);
 

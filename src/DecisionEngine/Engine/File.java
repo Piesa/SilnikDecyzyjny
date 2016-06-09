@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created by Ksysio on 2016-06-05.
  */
-public class File implements java.io.Serializable{
+public class File implements java.io.Serializable {
     public AllRules rules;
     public Data data;
 
@@ -14,7 +14,7 @@ public class File implements java.io.Serializable{
         rules = new AllRules();
     }
 
-    public File(Data data, AllRules rules){
+    public File(Data data, AllRules rules) {
         this.data = data;
         this.rules = rules;
     }

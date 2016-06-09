@@ -61,26 +61,29 @@ public class Rule implements java.io.Serializable {
             this.dataNegatedNames3 = dataName3;
     }
 
-    public String toString(){
-        if(howMany == 2)
+    public String toString() {
+        if (howMany == 2)
             return String.format("%s => %s", dataNegatedNames1, dataNegatedNames3);
         else
             return String.format("%s %s %s => %s", dataNegatedNames1, relationc, dataNegatedNames2, dataNegatedNames3);
 
-        }
-    public String getdataName(int x){
-        if(x == 1)
+    }
+
+
+
+    public String getdataName(int x) {
+        if (x == 1)
             return dataName1;
-        if(x == 2)
+        if (x == 2)
             return dataName2;
         else
             return dataName3;
     }
 
-    public boolean isNegated(int x){
-        if(x == 1)
+    public boolean isNegated(int x) {
+        if (x == 1)
             return isNegated1;
-        if(x == 2)
+        if (x == 2)
             return isNegated2;
         else
             return isNegated3;

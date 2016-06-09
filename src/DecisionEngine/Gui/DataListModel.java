@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * Created by Ksysio on 2016-06-05.
  */
-public class DataListModel extends AbstractListModel<String>{
+public class DataListModel extends AbstractListModel<String> {
 
     private File file;
 

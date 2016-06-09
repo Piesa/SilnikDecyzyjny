@@ -8,7 +8,7 @@ import javax.swing.*;
  */
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         JFrame frame = new JFrame("Forward and Backward Chaining Logical Engine ");
         frame.setContentPane(new MainWindow().ContentPanel);
