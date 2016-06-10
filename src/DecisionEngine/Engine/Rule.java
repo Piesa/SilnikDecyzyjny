@@ -9,9 +9,9 @@ public class Rule implements java.io.Serializable {
     public String dataName1;
     public String dataName2;
     public String dataName3;
-    public boolean isNegated1;
-    public boolean isNegated2;
-    public boolean isNegated3;
+    private boolean isNegated1;
+    private boolean isNegated2;
+    private boolean isNegated3;
     public int relation;
     private String relationc;
     public String dataNegatedNames1;
@@ -63,7 +63,7 @@ public class Rule implements java.io.Serializable {
 
     public String toString() {
         if (howMany == 2)
-            return String.format("%s => %s", dataNegatedNames1, dataNegatedNames3);
+            return String.format("%s == %s", dataNegatedNames1, dataNegatedNames3);
         else
             return String.format("%s %s %s => %s", dataNegatedNames1, relationc, dataNegatedNames2, dataNegatedNames3);
 

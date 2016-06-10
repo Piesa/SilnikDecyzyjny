@@ -78,6 +78,8 @@ public class MainWindow {
             currentFileName = null;
 
             searchedBox.removeAllItems();
+            textArea1.setText(null);
+
         });
 
 
@@ -133,6 +135,7 @@ public class MainWindow {
                 searchedBox.addItem(file.data.dataList.get(j).Name());
             }
             updateRulesView();
+            textArea1.setText(null);
         });
 
         saveButton.addActionListener(actionEvent -> {
@@ -157,14 +160,32 @@ public class MainWindow {
                 value = solver.forwardChaining(searchedBox.getSelectedItem().toString());
                 if (value == 1) {
                     trueRadioButton.setSelected(true);
+                    textArea1.append("Forward solving complete!\n");
                 }
                 if (value == 0) {
                     falseRadioButton.setSelected(true);
+                    textArea1.append("Forward solving complete!\n");
                 }
                 if (value == 666) {
                     unknownRadioButton.setSelected(true);
+                    textArea1.append("Couldn't find value with forward solving\n");
+                }
+            } else {
+                value = solver.backwardChaining(searchedBox.getSelectedItem().toString());
+                if (value == 1) {
+                    trueRadioButton.setSelected(true);
+                    textArea1.append("Backward solving complete!\n");
+                }
+                if (value == 0) {
+                    falseRadioButton.setSelected(true);
+                    textArea1.append("Backward solving complete!\n");
+                }
+                if (value == 666) {
+                    unknownRadioButton.setSelected(true);
+                    textArea1.append("Couldn't find value with backward solving\n");
                 }
             }
+            updateDataView();
         });
 
 
