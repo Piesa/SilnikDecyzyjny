@@ -14,6 +14,7 @@ public class Solver {
     public Solver(MainWindow mainWindow) {
 
         this.mainWindow = mainWindow;
+        int maxloops;
 
     }
 
@@ -35,7 +36,7 @@ public class Solver {
                 } else if ((getInformationValue(rule, 2) != 2) && (getInformationValue(rule, 1) == 1) && (getInformationValue(rule, 3) == 0)) {
                     setValue(rule, 1, 0);
                 }
-            } else if(rule.relation == 2) {
+            } else if (rule.relation == 2) {
                 if ((getInformationValue(rule, 2) != 2) && (getInformationValue(rule, 1) != 2) && (getInformationValue(rule, 3) == 2)) {
                     if ((getInformationValue(rule, 2) == 1) || (getInformationValue(rule, 1) == 1)) {
                         setValue(rule, 3, 1);
@@ -47,14 +48,45 @@ public class Solver {
                 }
             }
         }
+        mainWindow.updateDataView();
     }
 
-    public boolean forwardChaining() {
-        return true;
+    public int forwardChaining(String searched) {
+        int index = 0;
+        int checker = 0;
+        for (int i = 0; i < mainWindow.file.data.dataList.size(); i++) {
+            if (searched.equals(mainWindow.file.data.dataList.get(i).Name())) {
+                index = i;
+                if (mainWindow.file.data.dataList.get(i).value != 2) {
+                    return mainWindow.file.data.dataList.get(i).value;
+                }
+                break;
+            }
+        }
+        int maxloops = 1;
+        for (int i = 0; i < mainWindow.file.data.dataList.size(); i++) {
+            if (mainWindow.file.data.dataList.get(i).value == 2) {
+                maxloops++;
+            }
+        }
+        int tmp = 0;
+        while(mainWindow.file.data.dataList.get(index).value == 2){
+            if(tmp == mainWindow.file.rules.rulesList.size()){
+                checker ++;
+                tmp = 0;
+            }
+            solving(mainWindow.file.rules.rulesList.get(tmp));
+            //WYPISYWANIE POSTĘPOW ZROBIC
+            tmp++;
+            if(checker > maxloops)
+                return 666;
+        }
+        return mainWindow.file.data.dataList.get(index).value;
     }
 
-    public boolean backwardChaining() {
-        return true;
+
+    public int backwardChaining() {
+        return 1;
     }
 
     public Information getInformation(Rule rule, int x) {

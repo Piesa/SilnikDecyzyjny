@@ -21,7 +21,7 @@ public class MainWindow {
     public JPanel ContentPanel;
     private JList DataList;
     private JList RulesList;
-    private JTextArea textArea1;
+    public JTextArea textArea1;
     private JButton newButton;
     private JButton openButton;
     private JButton saveButton;
@@ -31,7 +31,6 @@ public class MainWindow {
     private JButton solveButton;
     private JRadioButton backwardRadioButton;
     private JRadioButton forwardRadioButton;
-    private JTextField textField1;
     private JRadioButton trueRadioButton;
     private JRadioButton falseRadioButton;
     private JButton removeSelectedButton;
@@ -39,6 +38,8 @@ public class MainWindow {
     private JTabbedPane Tab;
     private JPanel RulesTab;
     private JPanel ChainingTab;
+    public JComboBox searchedBox;
+    private JRadioButton unknownRadioButton;
     private JButton saveRulesButton;
     private JButton saveRulesAsButton;
     public File file;
@@ -51,7 +52,6 @@ public class MainWindow {
         file = new File();
 
         solver = new Solver(this);
-
 
         dataListModel = new DataListModel(file);
         DataList.setModel(dataListModel);
@@ -66,6 +66,7 @@ public class MainWindow {
 
         newButton.addActionListener(actionEvent -> {
             file = new File();
+
             dataListModel = new DataListModel(file);
             DataList.setModel(dataListModel);
             updateDataView();
@@ -75,6 +76,8 @@ public class MainWindow {
             updateRulesView();
 
             currentFileName = null;
+
+            searchedBox.removeAllItems();
         });
 
 
@@ -126,6 +129,9 @@ public class MainWindow {
 
             rulesListModel = new RulesListModel(file);
             RulesList.setModel(rulesListModel);
+            for (int j = 0; j < file.data.dataList.size(); j++) {
+                searchedBox.addItem(file.data.dataList.get(j).Name());
+            }
             updateRulesView();
         });
 
@@ -146,8 +152,21 @@ public class MainWindow {
         });
 
         solveButton.addActionListener(actionEvent -> {
-
+            int value;
+            if (forwardRadioButton.isSelected()) {
+                value = solver.forwardChaining(searchedBox.getSelectedItem().toString());
+                if (value == 1) {
+                    trueRadioButton.setSelected(true);
+                }
+                if (value == 0) {
+                    falseRadioButton.setSelected(true);
+                }
+                if (value == 666) {
+                    unknownRadioButton.setSelected(true);
+                }
+            }
         });
+
 
         removeSelectedButton.addActionListener(actionEvent -> {
             if (DataTab.isVisible()) {
@@ -158,6 +177,7 @@ public class MainWindow {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Can't remove data.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+                searchedBox.removeItemAt(DataList.getSelectedIndex());
             }
             if (RulesTab.isVisible()) {
                 try {

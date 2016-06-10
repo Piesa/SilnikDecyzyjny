@@ -69,6 +69,7 @@ public class AddDataWindow {
             }
             if (!error)
                 mainWindow.file.data.AddToData(information);
+            mainWindow.searchedBox.addItem(information.Name());
             mainWindow.updateDataView();
         });
 
